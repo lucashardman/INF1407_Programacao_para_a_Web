@@ -6,14 +6,14 @@
 * Instalar Apache Tomcat
 * Instalar Eclipse EE
 
-* Extrair apache-tomcat-x.x.x.zip
-* Verifique se tem algum jre selecionado e se o Type dele está Standard VM
+* Extrair apache-tomcat-x.x.x.zip 
+* Verifique se tem algum jre selecionado e se o Type dele está Standard VM  
   Eclipse EE > Window > Preferences > Java > Installed JREs
 
 * Se não tiver, adicione
 
-  Add > Standard VM > Directory...
-  Selecione a pasta do jre
+  Add > Standard VM > Directory...  
+  Selecione a pasta do jre  
   Clique finish.
 
 * Selecionar o servidor Apache Tomcat

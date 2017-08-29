@@ -5,7 +5,6 @@
 * Instalar Java JRE
 * Instalar Apache Tomcat
 * Instalar Eclipse EE
-
 * Extrair apache-tomcat-x.x.x.zip 
 * Verifique se tem algum jre selecionado e se o Type dele está Standard VM
 

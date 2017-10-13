@@ -1,37 +1,21 @@
-# Primeiro Trabalho
+# Segundo Trabalho
 
 ### Enunciado
 
-Implemente uma calculadora que realize as 4 operações. Se preferir, baseie-se no seguinte modelo HTML para facilitar a vida.
-A calculadora deve funcionar como uma calculadora básica de 4 operações sem precedêncida (se não tiver onde se basear, use a
-do Windows no modo "Padrão" ou "Standard").
+Faça uma página chamada "banner.jsp" que apresente aleatoriamente um dos quatro banners do arquivo "banner.zip" (diponível no nosso site, em "arquivos para exercícios"). Quando um usuário clicar no banner, ele (o usuário) deve ser direcionado para a página referente ao banner, ou seja, para um dos endereços listados na tabela a seguir. Faça uma página chamada "contabilidade.jsp" que apresente a contabilidade dos clicks realizados nos banners de TODOS os usuários do site.
 
-```JSP
-<form action="index.jsp" method="get">
-<input type='text' name='op1'/><br/>
-<p>
-<input type='submit' name='operacao' value='+'/>
-<input type='submit' name='operacao' value='-'/><br/>
-<input type='submit' name='operacao' value='*'/>
-<input type='submit' name='operacao' value='/'/><br/>
-<input type='submit' name='operacao' value='='/>
-<p/>
-</form>
-```
+
+Nome do Banner | Endereço do site
+------------ | -------------
+banner-PUC | http://www.puc-rio.br 
+banner-DI | http://www.inf.puc-rio.br
+banner-Java | http://java.com
+banner-DAD | http://dad.puc-rio.br
 
 ### Solução
 
-O uso de variaveis globais, session ou application iria fazer com que as operações feitas em uma janela/aba interferissem no 
-resultado das outras janelas/abas que estivessem utilizando a calculadora. Portanto a solução foi utilizar campos "hidden" para 
-guardar as informações. Um para guardar valores auxiliares e outro para guardar a operação que será efetuada.
+O "banner.jsp" chama o bean "BannerNumber.java" (com escopo request) para gerar um número aleatório de 0 a 3 a cada vez que o usuário acessa a página. Ele também chama o bean "CountClicks.java" que possui um contador de cliques para cada banner e inicializa eles com 0, utilizando o escopo application. Cada número gerado está associado a um banner diferente. Desta forma, utilizando as tags condicionais do JSTL, dependendo do número gerado é criado um formulário com um campo hidden contanto o número e um campo com a imagem do banner. Ao clicar no banner, o formulário chama o servlet "PrimeiroServlet.java".
 
-```JSP
-<input type='text' name='operacao' value='<%=request.getAttribute("OpType")%>' hidden/>
-<input type='text' name='auxiliar' value='<%=request.getAttribute("TextValue")%>' hidden/>
-```
+O "PrimeiroServlet.java" vai chamar o bean "CountClicks.java". Como vimos, o servlet recebe como parâmetro o número referente ao banner clicado. Ele utilizará este número para receber o atributo do beans que contém o contador de cliques deste banner, incrementa o contador, passa o novo valor para beans e depois redireciona para a página web da instituição.
 
-Para alterar esses "input hidden" utilizamos request.getAttribute(ATRIBUTO) para "buscar" valores no servlet e request.setAttribute(ATRIBUTO, VALOR) 
-para "enviar" valores para os campos. Para isso é importante que o código Java seja escrito ANTES do formulário HTML.  
-
-Obs: Não foi implementado controle de erros, pois não pedido no enunciado. Por exemplo, divisão por zero, input de caracteres
-invalidos...
+O "contabilidade.jsp" chama o bean "CountClicks.java" e utiliza a tag 'out' do JSTL para apresentar o número total de cliques de cada banner.
